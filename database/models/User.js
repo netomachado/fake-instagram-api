@@ -30,6 +30,8 @@ module.exports = (sequelize, DataTypes) => {
         type: 'TIMESTAMP',
         allowNull: false
       }
+    }, {
+      underscored: true
     }
   );
 

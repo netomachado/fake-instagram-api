@@ -1,11 +1,12 @@
 {
   "development": {
     "username": "root",
-    "password": "arrozefeijao29",
+    "password": "",
     "database": "fake_instagram",
     "host": "localhost",
     "dialect": "mysql",
     "port": 3306
+    
   },
   "test": {
     "username": "root",

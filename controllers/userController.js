@@ -1,5 +1,5 @@
 const usersModel = require("../models/users");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 exports.store = async function({ name, surname, username, email, password, dateOfBirth }) {
   return usersModel.createNewUser({
@@ -8,6 +8,6 @@ exports.store = async function({ name, surname, username, email, password, dateO
     email,
     username,
     password: bcrypt.hashSync(password),
-    dateOfBirth
+    dateOfBirth: new Date(dateOfBirth)
   });  
 }

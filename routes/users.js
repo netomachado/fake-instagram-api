@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 const UserController = require("../controllers/userController");
 
@@ -16,19 +16,20 @@ router.post("/", async function (req, res) {
     const newUser = await UserController.store({ name, surname, username, email, password, dateOfBirth });
 
     return res.status(201).json(newUser);
+
   } catch (e) {
-    if (e.name === "SequelizeConnectionRefusedError") {
-      return res.status(500).json({
-        error: true,
-        msg: "Sem conexão com o banco de dados, tente novamente!",
-      });
-    }
-    if (e.name === "SequelizeUniqueConstraintError") {
-      return res.status(400).json(e.parent.sqlMessage);
-    }
+    // console.log(e);
+    // if (e.name === "SequelizeConnectionRefusedError") {
+    //   return res.status(500).json({
+    //     error: true,
+    //     msg: "Sem conexão com o banco de dados, tente novamente!",
+    //   });
+    // }
+    // if (e.name === "SequelizeUniqueConstraintError") {
+    //   return res.status(400).json(e.parent.sqlMessage);
+    // }
     return res.status(400).json({
-      error: true,
-      msg: "Erro na requisição tente novamente!",
+      error: e.msg,
     });
   }
 });

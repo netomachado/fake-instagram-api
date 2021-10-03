@@ -1,22 +1,24 @@
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
+const cors = require("cors")
 
-var usersRouter = require("./routes/users");
-var app = express();
+const usersRouter = require("./routes/users");
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", usersRouter);
 
 app.use(function (req, res, next) {
-  next(createError(404));
+  return re.status(404).json({rerror: 'endpoint not found'});
 });
 
 // error handler
